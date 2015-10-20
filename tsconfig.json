@@ -33,6 +33,7 @@
         "src/lib/index.ts",
         "src/lib/model.ts",
         "src/lib/remoteProxy.ts",
+        "src/lib/runtime.ts",
         "node_modules/marklogic-typescript-definitions/ts/index.d.ts",
         "node_modules/marklogic-node-typescript-definitions/ts/index.d.ts"
     ],
