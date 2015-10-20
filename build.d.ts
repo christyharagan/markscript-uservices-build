@@ -6,8 +6,8 @@ declare module MarkScript {
     middle: {
       host: string
       port: number
-      specsPath: string
     }
+    specsPath?: string
   }
 }
 

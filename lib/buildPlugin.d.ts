@@ -4,8 +4,8 @@ export interface UServicesBuildConfig {
     middle: {
         host: string;
         port: number;
-        specsPath: string;
     };
+    specsPath?: string;
 }
 export interface UServicesBuildModel {
     serviceSpecs?: m.MLServices;
