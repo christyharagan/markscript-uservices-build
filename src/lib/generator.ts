@@ -11,13 +11,15 @@ export function generateServiceSpecs(modules: KeyValue<s.Module>): m.MLServices 
   return u.generateServiceSpecs(
     modules,
     function(decorator: s.Decorator<s.ClassConstructor>) {
-      return decorator.decoratorType.name === 'mlService' && decorator.decoratorType.parent.name === 'markscript-uservices/dist/lib/decorators'
+      // TODO: Implement Proper type checking
+      return decorator.decoratorType.name === 'mlService'// && decorator.decoratorType.parent.name === 'markscript-uservices/dist/lib/decorators'
     },
     null,
     function(method: m.MLMethod, member: s.ClassConstructorMember) {
       if (member.decorators) {
         let mlMethod = member.decorators.filter(function(decorator) {
-          return decorator.decoratorType.name === 'mlMethod' && decorator.decoratorType.parent.name === 'markscript-uservices/dist/lib/decorators'
+          // TODO: Implement Proper type checking
+          return decorator.decoratorType.name === 'mlMethod'// && decorator.decoratorType.parent.name === 'markscript-uservices/dist/lib/decorators'
         })[0]
         if (mlMethod) {
           // TODO: Waiting on better enum-expression support in typescript-schema
@@ -36,7 +38,8 @@ export function generateServiceSpecs(modules: KeyValue<s.Module>): m.MLServices 
     function(event: m.MLEvent, member: s.ClassConstructorMember) {
       if (member.decorators) {
         let mlEvent = member.decorators.filter(function(decorator) {
-          return decorator.decoratorType.name === 'mlEvent' && decorator.decoratorType.parent.name === 'markscript-uservices/dist/lib/decorators'
+          // TODO: Implement Proper type checking
+          return decorator.decoratorType.name === 'mlEvent'// && decorator.decoratorType.parent.name === 'markscript-uservices/dist/lib/decorators'
         })[0]
         if (mlEvent) {
           let eventOptions = <mu.EventOptions>expressionToLiteral(mlEvent.parameters[0])
@@ -56,10 +59,11 @@ export function generateAssetModel(serviceSpecs: m.MLServices, baseUri: string, 
   if (!assetModel.modules) {
     assetModel.modules = {}
   }
-  assetModel.modules['markscript-uservices'] = {
-    name: 'markscript-uservices',
-    code: fs.readFileSync(path.join(__dirname, 'rfp.js'), 'utf8')
-  }
+  // TODO: This is moved to markscript-core as a temporary hack. Do this properly
+  // assetModel.modules['markscript-uservices'] = {
+  //   name: 'markscript-uservices',
+  //   code: fs.readFileSync(path.join(__dirname, 'rfp.js'), 'utf8')
+  // }
 
   u.visitServices(serviceSpecs, {
     onService: function(serviceSpec) {

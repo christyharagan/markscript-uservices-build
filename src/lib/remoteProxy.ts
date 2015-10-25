@@ -23,10 +23,10 @@ export function createRemoteProxy<T>(service: m.MLService, client: DatabaseClien
             // case 'GET':
             // case 'DELETE':
             case 'PUT':
-              resultProvider = client.resources.put({ name: service.name + '-' + method.name, documents: JSON.stringify(args) })
+              resultProvider = client.resources.put({ name: service.name + '-' + method.name, documents: {contentType:'application/json', content:args} })
               break
             case 'POST':
-              resultProvider = client.resources.post({ name: service.name + '-' + method.name, documents: JSON.stringify(args) })
+              resultProvider = client.resources.post({ name: service.name + '-' + method.name, documents: {contentType:'application/json', content:args} })
               break
           }
           resultProvider.result(function(value) {
