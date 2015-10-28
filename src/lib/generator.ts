@@ -5,7 +5,6 @@ import * as m from './model'
 import * as mu from 'markscript-uservices'
 import * as path from 'path'
 import * as fs from 'fs'
-//import * as b from 'markscript-basic-build'
 
 export function generateServiceSpecs(modules: KeyValue<s.Module>): m.MLServices {
   return u.generateServiceSpecs(
@@ -88,10 +87,6 @@ export function generateAssetModel(serviceSpecs: m.MLServices, baseUri: string, 
         }
         let packageJson = p.getPackageJson(pkgDir)
         moduleName = '/' + path.join(packageJson.name, moduleName)
-//        let tsConfig = p.getTSConfig(pkgDir)
-//        let baseDir = tsConfig.compilerOptions.rootDir ? path.join(pkgDir, tsConfig.compilerOptions.rootDir) : pkgDir
-
-//        b.addModules(assetModel, pkgDir, baseDir, [modulePath])
       } else if (serviceSpec.type) {
         let cc = <s.ClassConstructor>serviceSpec.type
         moduleName = '/' + containerToString(cc.parent).replace(/:/g, '/')
@@ -118,7 +113,7 @@ context.outputTypes = ["application/json"];
 var promise = service.${method.name}.apply(service, input.toObject());
 var value;
 var error;
-promise.then(function(v){
+promise._then(function(v){
 value = v;
 }, function(e){
 error = e;
@@ -170,7 +165,7 @@ headers: {
 }));
 
 module.exports = function(uri, content){
-observable.onNext({uri: uri, content: content});
+observable.next({uri: uri, content: content});
 }`
           let alertModuleName = '/_alerts' + moduleName.replace(/:/g, '/') + '/' + className + '/' + event.name
           if (!assetModel.modules) {
